@@ -1,0 +1,41 @@
+public class Pilot {
+    private static final int MIN_AGE = 20;
+    private static final int MAX_AGE = 120;
+    private static final int MIN_RANK = 1;
+    private static final int MAX_RANK = 5;
+    private final String name;
+    private final int age;
+    private final int rank;
+
+    public Pilot(String name, int age, int rank) {
+
+        if (age < MIN_AGE || age > MAX_AGE) {
+            throw new IllegalArgumentException("Age must be between 20 and 120");
+        }
+
+        if (rank < MIN_RANK || rank > MAX_RANK) {
+            throw new IllegalArgumentException("Rank must be between 1 and 5");
+        }
+
+        this.name = name;
+        this.age = age;
+        this.rank = rank;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pilot{name='%s', age=%d, rank=%d}", name, age, rank);
+    }
+}
