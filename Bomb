@@ -1,0 +1,17 @@
+public class Bomb extends Weapon {
+    private final double weight;
+
+    public Bomb(String name, int strength, double weight) {
+        super(name, strength);
+        this.weight = weight;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Bomb{%s, weight=%s,}", super.toString(), weight);
+    }
+}
