@@ -1,0 +1,107 @@
+import java.util.List;
+
+public class AirCraftStatistics {
+    public static void main(String[] args) {
+        Aircraft aircraft = new Aircraft();
+
+        Plane plane1 = new Plane("f15", new Pilot("David", 25, 5), 3);
+        plane1.add(new Bomb("b1", 100, 450));
+        plane1.add(new MachineGun("mg1", 40, 350));
+
+        Plane plane2 = new Plane("f16", new Pilot("Barak", 55, 4), 4);
+        plane2.add(new MachineGun("mg2", 90, 150));
+        plane2.add(new Bomb("b2", 100, 330));
+        plane2.add(new Bomb("b3", 40, 460));
+
+        aircraft.add(plane1);
+        aircraft.add(plane2);
+
+        double ageAverage = getAgeAverage(aircraft);
+        System.out.printf("Average pilots age:  %.2f\n", ageAverage);
+
+        double rankAverage = getRankAverage(aircraft);
+        System.out.printf("Average pilots rank:  %.2f\n", rankAverage);
+
+        int countPilotsOverAge = getCountPilotsOverAge(34, aircraft);
+        System.out.printf("Count pilots over 34: %d\n", countPilotsOverAge);
+
+        int countBombsWithStrength = getCountBombsWithStrength(100, aircraft);
+        System.out.printf("Count Bomb with strength 100: %d\n", countBombsWithStrength);
+
+        int countMachineGunsWithBulletsCount = getCountMachineGunsWithBulletsCount(150, aircraft);
+        System.out.printf("Count machine guns with 150 bullets: %d\n", countMachineGunsWithBulletsCount);
+
+        boolean pilotExists = isPilotExists("David", aircraft);
+        System.out.printf("David, are you here? Answer: %s\n", pilotExists ? "yes" : "no");
+    }
+
+    private static boolean isPilotExists(String name, Aircraft aircraft) {
+        for (Plane plane : aircraft.getPlanes()) {
+            if (plane.getPilot().getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int getCountMachineGunsWithBulletsCount(int bulletsCount, Aircraft aircraft) {
+        int count = 0;
+        for (Plane plane : aircraft.getPlanes()) {
+            for (Weapon weapon : plane.getWeapons()) {
+                if (weapon instanceof MachineGun) {
+                    MachineGun machineGun = (MachineGun) weapon;
+                    if (machineGun.getBulletsCount() == bulletsCount) {
+                        ++count;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+
+    private static int getCountBombsWithStrength(int strength, Aircraft aircraft) {
+        int count = 0;
+        for (Plane plane : aircraft.getPlanes()) {
+            for (Weapon weapon : plane.getWeapons()) {
+                if (weapon instanceof Bomb) {
+                    if (weapon.getStrength() == strength) {
+                        ++count;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    private static int getCountPilotsOverAge(int ageThreshold, Aircraft aircraft) {
+        int count = 0;
+        List<Plane> planes = aircraft.getPlanes();
+        for (Plane plane : planes) {
+            if (plane.getPilot().getAge() > ageThreshold) {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    private static double getRankAverage(Aircraft aircraft) {
+        double sum = 0;
+        List<Plane> planes = aircraft.getPlanes();
+
+        for (Plane plane : planes) {
+            sum += plane.getPilot().getRank();
+        }
+        return sum / planes.size();
+    }
+
+    private static double getAgeAverage(Aircraft aircraft) {
+        double sum = 0;
+        List<Plane> planes = aircraft.getPlanes();
+
+        for (Plane plane : planes) {
+            sum += plane.getPilot().getAge();
+        }
+        return sum / planes.size();
+    }
+}
