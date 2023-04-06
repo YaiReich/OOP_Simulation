@@ -1,0 +1,17 @@
+public class MachineGun extends Weapon {
+    private final int bulletsCount;
+
+    public MachineGun(String name, int strength, int bulletsCount) {
+        super(name, strength);
+        this.bulletsCount = bulletsCount;
+    }
+
+    public int getBulletsCount() {
+        return bulletsCount;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("MachineGun{%s, bulletsCount=%d", super.toString(), bulletsCount);
+    }
+}
