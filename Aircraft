@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Aircraft {
+    private final List<Plane> planes;
+
+    public Aircraft() {
+        this.planes = new ArrayList<>();
+    }
+
+    public boolean add(Plane plane) {
+        return planes.add(plane);
+    }
+
+    public List<Plane> getPlanes() {
+        return planes;
+    }
+}
