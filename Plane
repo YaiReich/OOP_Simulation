@@ -1,0 +1,42 @@
+public class Plane {
+    private static final int MAX_WEAPONS = 10;
+    private final String model;
+    private final Weapon[] weapons;
+    private final Pilot pilot;
+    private final double speedMach;
+    private int totalWeapons;
+
+    public void add(Weapon weapon){
+        if (totalWeapons != weapons.length) {
+            weapons[totalWeapons++] = weapon;
+        }
+    }
+
+    public Plane(String model, Pilot pilot, double speedMach) {
+        this.model = model;
+        this.pilot = pilot;
+        this.speedMach = speedMach;
+        this.weapons = new Weapon[MAX_WEAPONS];
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public Weapon[] getWeapons() {
+        return weapons;
+    }
+
+    public Pilot getPilot() {
+        return pilot;
+    }
+
+    public double getSpeedMach() {
+        return speedMach;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Plane{model='%s', speedMach=%s, totalWeapons=%d}", model, speedMach, totalWeapons);
+    }
+}
