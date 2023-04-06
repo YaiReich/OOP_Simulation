@@ -1,0 +1,25 @@
+public abstract class Weapon {
+    private final String name;
+    private final int strength;
+
+    public Weapon(String name, int strength) {
+        if (strength < 10 || strength > 100) {
+            throw new IllegalArgumentException("Strength must be between 10 and 100");
+        }
+        this.name = name;
+        this.strength = strength;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Weapon{name='%s',strength=%d}", name, strength);
+    }
+}
